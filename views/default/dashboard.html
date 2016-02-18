@@ -1,0 +1,61 @@
+{{extend 'base.html'}}
+
+<div class="page-title">
+	<span class="title">{{=T('Dashboard')}}</span>
+</div>
+
+<div class="row">
+	<div class="col-xs-12">
+		<div class="card">
+			<div class="card-header">
+				<div class="card-title col-xs-12">
+					<div class="title">Seus grupos
+					<a href="{{=URL('novo_grupo')}}">
+						<button type="button" class="btn btn-info pull-right">Novo Grupo</button>
+					</a>
+					</div>
+				</div>
+			</div>
+			<div class="card-body">
+				{{if grupos:}}
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Grupo</th>
+							<th>Data de Sorteio</th>
+							<th>Valor Máximo</th>
+							<th>Ações</th>
+						</tr>
+					</thead>
+					<tbody>
+						{{for grupo in grupos:}}
+							<tr>
+								<td>{{=grupo.nome}}</td>
+								<td>{{=grupo.data_revelacao}}</td>
+								<td>{{=grupo.valor_maximo}}</td>
+								<td>
+									{{if dono_grupo(grupo.id) or participa_grupo(grupo.id):}}
+									<a href="{{=URL('grupo', args=grupo.id)}}">
+										<button type="button" class="btn btn-xs btn-primary">Ver</button>
+									</a>
+									{{pass}}
+									{{if dono_grupo(grupo.id):}}
+									<a href="{{=URL('atualizar_grupo', args=grupo.id)}}">
+										<button type="button" class="btn btn-xs btn-warning">Editar</button>
+									</a>
+									<a href="{{=URL('apagar_grupo', args=grupo.id)}}">
+										<button type="button" class="btn btn-xs btn-danger">Excluir</button>
+									</a>
+									{{pass}}
+								</td>
+							</tr>
+						{{pass}}
+					</tbody>
+				</table>
+				{{else:}}
+				<p>Você ainda não possui nem participa de nenhum grupo. Que tal começar criando um?</p>
+				{{pass}}
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,33 @@
+{{extend 'base.html'}}
+
+{{block breadcrumb}}
+{{super}}
+<li><a href="{{=URL('desejos', args=auth.user.id)}}">Lista de Desejos</a></li>
+<li>Novo Desejo</li>
+{{end}}
+
+<div class="page-title">
+	<span class="title">Novo Desejo</span>
+	<div class="description">Crie um novo desejo para a sua Lista de Desejos.</div>
+</div>
+
+<div class="row">
+	<div class="col-xs-12">
+		<div class="card">
+			<div class="card-body">
+				{{=form.custom.begin}}
+					<div class="form-group">
+                        <label for="lista_desejos_presente">Desejo</label>
+                        {{form.elements("#lista_desejos_presente")[0]['_class']='form-control'}}
+                        {{=form.custom.widget.presente}}
+                    </div>
+                    <div class="form-group">
+                    	<label for="lista_desejos_imagem">Imagem do Desejo</label>
+                    	{{=form.custom.widget.imagem}}
+                    </div>
+                    <input type="submit" class="btn btn-success" value="Enviar" />
+				{{=form.custom.end}}
+			</div>
+		</div>
+	</div>
+</div>

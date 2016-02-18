@@ -1,0 +1,20 @@
+{{extend 'base.html'}}
+
+{{block breadcrumb}}
+{{super}}
+<li>{{=request.args(0).replace('_',' ')}}</li>
+{{end}}
+
+<div class="page-title">
+    <span class="title">{{=request.args(0).replace('_',' ').title()}}</span>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="card">
+            <div class="card-body">
+                {{=form}}
+            </div>
+        </div>
+    </div>
+</div>

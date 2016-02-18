@@ -1,0 +1,42 @@
+{{extend 'user_template.html'}}
+
+ <div class="login-box">
+    <div>
+        <div class="login-form row">
+            <div class="col-sm-12">
+                <div class="login-body">
+                    <div class="progress hidden" id="login-progress">
+                        <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                            Registrar
+                        </div>
+                    </div>
+                    {{=form.custom.begin}}
+                        <div class="control">
+                            <label>Nome</label>
+                            {{=form.custom.widget.first_name}}
+                        </div>
+                        <div class="control">
+                            <label>Sobrenome</label>
+                            {{=form.custom.widget.last_name}}
+                        </div>
+                        <div class="control">
+                            <label>Email</label>
+                            {{=form.custom.widget.email}}
+                        </div>
+                        <div class="control">
+                            <label>Senha</label>
+                            {{=form.custom.widget.password}}
+                        </div>
+                        <div class="control">
+                            <label>Repita a Senha</label>
+                            {{=form.custom.widget.password_two}}
+                        </div>
+                        <div class="login-button text-center">
+                            <input type="submit" class="btn btn-primary" value="Registrar">
+                        </div>
+                    {{=form.custom.end}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

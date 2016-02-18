@@ -1,0 +1,21 @@
+{{extend 'base.html'}}
+
+{{block breadcrumb}}
+{{super}}
+<li>Novo Grupo</li>
+{{end}}
+
+<div class="page-title">
+	<span class="title">Novo Grupo</span>
+	<div class="description">Crie um novo grupo para realizar um novo sorteio.</div>
+</div>
+
+<div class="row">
+	<div class="col-xs-12">
+		<div class="card">
+			<div class="card-body">
+				{{=form}}
+			</div>
+		</div>
+	</div>
+</div>

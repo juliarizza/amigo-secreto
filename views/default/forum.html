@@ -1,0 +1,85 @@
+{{extend 'base.html'}}
+
+{{block breadcrumb}}
+{{super}}
+<li>Fórum</li>
+{{end}}
+
+<div class="page-title">
+	<span class="title">Fórum</span>
+	<div class="description">Converse com seus amigos do grupo :)</div>
+</div>
+
+<div class="row">
+	<div class="col-xs-12">
+		<div class="card">
+			<div class="card-body">
+				<form class="form-inline pull-right" action="" method="post">
+					<input type="text" class="form-control" name="q" placeholder="Buscar" style="height: 35px;padding:5px;" />
+					<input type="submit" class="btn btn-success" style="height:35px;padding:5px;" value="Buscar" />
+				</form>
+				<div class="sub-title">
+					Mensagens
+				</div>
+				{{if mensagens:}}
+					{{for msg in mensagens:}}
+						<div class="media">
+						  <div class="media-left">
+						      <img class="media-object" src="{{=URL('download', args=msg.created_by.avatar)}}" alt="Imagem do Usuário" width=64 height=64>
+						  </div>
+						  <div class="media-body">
+						    <h4 class="media-heading">
+						    	{{=msg.created_by.first_name}} disse:
+						    	{{if db(Forum.id == msg.id).select().first().created_by == auth.user.id or auth.has_membership("Administrador"):}}
+						    	<a href="{{=URL('apagar_mensagem', args=msg.id)}}">
+						    		<i class="fa fa-trash icon pull-right"></i>
+						    	</a>
+						    	<a href="{{=URL('editar_mensagem', args=msg.id)}}">
+						    		<i class="fa fa-pencil icon pull-right"></i>
+						    	</a>
+						    	{{pass}}
+						    </h4>
+						    {{=msg.mensagem}}
+						  </div>
+						</div>
+					{{pass}}
+				{{else:}}
+					{{if request.vars.q:}}
+					<div class="alert alert-danger">
+						Nenhuma mensagem encontrada.
+					</div>
+					{{else:}}
+					<div class="alert alert-info">
+						Ainda não existem mensagens neste fórum. Seja o primeiro!
+					</div>
+					{{pass}}
+				{{pass}}
+				<div>
+					<center>
+						<nav>
+	                        <ul class="pagination pagination-sm">
+	                            <li>
+	                                <a href="{{=URL(args=request.args,vars={'page':int(request.vars.page)-1})}}" aria-label="Anterior">
+	                                    <span aria-hidden="true">&laquo;</span>
+	                                </a>
+	                            </li>
+	                            <li>
+	                                <a href="{{=URL(args=request.args,vars={'page':int(request.vars.page)+1})}}" aria-label="Próximo">
+	                                    <span aria-hidden="true">&raquo;</span>
+	                                </a>
+	                            </li>
+	                        </ul>
+                    </nav>
+                	</center>
+				</div>
+				<div class="sub-title">Envie uma mensagem</div>
+				{{=form.custom.begin}}
+					<div class="form-group">
+						<textarea class="form-control" name="mensagem" rows="5"></textarea>
+						<button type="submit" class="btn btn-success">Submit</button>
+					</div>
+				{{=form.custom.end}}
+			</div>
+		</div>
+	</div>
+</div>

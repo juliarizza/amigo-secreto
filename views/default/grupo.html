@@ -1,0 +1,51 @@
+{{extend 'base.html'}}
+
+{{block breadcrumb}}
+{{super}}
+<li>{{=grupo.nome}}</li>
+{{end}}
+
+<div class="page-title">
+	<span class="title">{{=grupo.nome}}</span>
+		{{if request.now.date() >= grupo.data_sorteio:}}
+		<a href="{{=URL('sortear', args=grupo.id)}}"><button type="button" class="btn btn-sm btn-info pull-right" style="margin-left: 5px;">Realizar sorteio</button></a>
+		{{pass}}
+	<a href="{{=URL('forum', args=grupo.id)}}">
+		<button type="button" class="btn btn-sm btn-warning pull-right">Fórum</button> 
+	</a>
+	<div class="description">Informações do sorteio deste grupo.</div>
+</div>
+
+<div class="row">
+	<div class="col-xs-12">
+		<div class="card">
+			<div class="card-body">
+				<div class="sub-title">Informações do Sorteio</div>
+				<ul>
+				<li><strong>Data do Sorteio:</strong> {{=grupo.data_sorteio}}</li>
+				<li><strong>Data de Revelação:</strong> {{=grupo.data_revelacao}}</li>
+				<li><strong>Valor Máximo (R$):</strong> {{=grupo.valor_maximo}}</li>
+				<li><strong>Status do Sorteio:</strong> {{if sorteio:}}Realizado{{else:}}Não realizado até o momento{{pass}}</li>
+				</ul>
+				<div class="sub-title">Participantes
+				<a href="{{=URL('convidar_amigo', args=grupo.id)}}"><button class="btn btn-info btn-sm">Convidar Amigo</button></a>
+				</div>
+				{{for part in participantes:}}
+				<div class="col-xs-2">
+					<div class="card profile">
+						<div class="card-profile-img">
+							<img src="{{=URL('download', args=part.avatar)}}">
+						</div>
+						<div class="card-body">
+							<div class="name">{{=part.first_name}} {{=part.last_name}}</div>
+						</div>
+						<div class="card-footer">
+							<a href="{{=URL('desejos', args=part.id)}}"><i class="fa fa-users"></i> Ver lista de desejos</a>
+						</div>
+					</div>
+				</div>
+				{{pass}}
+			</div>
+		</div>
+	</div>
+</div>

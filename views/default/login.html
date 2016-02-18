@@ -1,0 +1,36 @@
+{{extend 'user_template.html'}}
+
+ <div class="login-box">
+    <div>
+        <div class="login-form row">
+            <div class="col-sm-12 text-center login-header">
+                <i class="login-logo fa fa-connectdevelop fa-5x"></i>
+                <h4 class="login-title">{{=response.title or request.application}}</h4>
+            </div>
+            <div class="col-sm-12">
+                <div class="login-body">
+                    <div class="progress hidden" id="login-progress">
+                        <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                            Log In
+                        </div>
+                    </div>
+                    {{=form.custom.begin}}
+                        <div class="control">
+                        	{{form.elements('#auth_user_email')[0]['_placeholder']='admin@email.com'}}
+                            {{=form.custom.widget.email}}
+                        </div>
+                        <div class="control">
+                            {{=form.custom.widget.password}}
+                        </div>
+                        <div class="login-button text-center">
+                            <input type="submit" class="btn btn-primary" value="Login">
+                        </div>
+                    {{=form.custom.end}}
+                </div>
+                <div class="login-footer">
+                    <span class="text-right"><a href="{{=URL('user', args='retrieve_password')}}" class="color-white">Esqueceu a senha?</a></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
